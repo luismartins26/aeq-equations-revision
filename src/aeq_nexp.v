@@ -72,7 +72,7 @@ Import L.
 (* end hide *) 
 (** * Introduction 
 
-This work studies $\alpha$-equivalence, a fundamental problem in both Computer Science and Mathematics that concerns the characterization of terms differing only in the names of their bound variables. Several approaches tackle this problem, such as De Bruijn notation %\cite{bruijnLambdaCalculusNotation1972}%, in which $\alpha$-equivalent terms have a unique representation; the locally nameless representation %\cite{chargueraudLocallyNamelessRepresentation2011}%, in which bound variables are represented by De Bruijn indices and free variables by named variables; and the nominal approach %\cite{gabbayNewApproachAbstract2002}%, in which variables are named, $\alpha$-equivalence must be handled explicitly and renaming is done by swapping variable names. In the context of the untyped $\lambda$-calculus with named variables, we present four different notions of $\alpha$-equivalence and prove that they are mutually equivalent in the Rocq proof assistant %\cite{rocq-prover}%.
+This work studies $\alpha$-equivalence, a fundamental problem in both Computer Science and Mathematics that concerns the characterization of terms differing only in the names of their bound variables. Several approaches tackle this problem, such as de Bruijn notation %\cite{bruijnLambdaCalculusNotation1972}%, in which $\alpha$-equivalent terms have a unique representation; the locally nameless representation %\cite{chargueraudLocallyNamelessRepresentation2011}%, in which bound variables are represented by de Bruijn indices and free variables by named variables; and the nominal approach %\cite{gabbayNewApproachAbstract2002}%, in which variables are named; $\alpha$-equivalence must be handled explicitly and renaming is done by swapping variable names. In the context of the untyped $\lambda$-calculus with named variables, we present four different notions of $\alpha$-equivalence and prove that they are mutually equivalent in the Rocq proof assistant%\footnote{Version 9.1.1} \cite{rocq-prover}%.
 
 The contributions of this work are as follows:
 
@@ -88,7 +88,7 @@ The contributions of this work are as follows:
   \item A machine-checked proof that $=_a$, $=_p$, $=_s$ and $=_{\alpha}$ are mutually equivalent.
  \end{enumerate}%
 
-This work is developed with the Rocq proof assistant, and this article is generated directly from a Rocq source file. Consequently, the formal statements and proof scripts shown in this article are the actual Rocq code, and every claim labelled as a lemma or a theorem has been machine-verified. The source code is freely available at
+This work is developed with the Rocq proof assistant, and this article is generated directly from a Rocq source file. Consequently, the formal statements and proof scripts shown in this article are the actual Rocq code, and every claim labeled as a lemma or a theorem has been machine-verified. The source code is freely available at
 
 %\url{https://github.com/flaviodemoura/aeq-equations}%
 
@@ -134,9 +134,9 @@ The language of the untyped $\lambda$-calculus as presented in standard textbook
  t ::= x \mid \lambda_x.t \mid t\ t
 \end{equation}%
 
-Variables are represented by atoms, which are structureless entities with a decidable equality: distinct names denote distinct atoms, and hence distinct variables. The nominal approach to abstract syntax was introduced by %\cite{gabbayNewApproachAbstract2002}%, motivated by the need for a mathematically rigorous and uniform treatment of variable binding and $\alpha$-equivalence. The central observation of their work is that the standard set-theoretic treatment of syntax with binders, which typically requires working with equivalence classes of terms under $\alpha$-renaming, can be replaced by a concrete, first-order presentation in which names are treated as primitive objects equipped with a notion of _freshness_. Rather than quotienting by $\alpha$-equivalence, terms are considered as concrete syntactic objects and equivalence is captured by the action of finite permutations of names. This approach yields clean inductive characterisations of $\alpha$-equivalence that is amenable to mechanical verification. The nominal approach has since been widely adopted in proof assistants and formalisation frameworks, most notably in Nominal Isabelle %\cite{urbanGeneralBindingsAlphaEquivalence2012}%, and has been applied to the formalisation of type theories, process calculi, and programming language semantics. The present work follows the nominal tradition and employs the Metalib library%\cite{weirichCoqMetalibPackage}% to support the development in Rocq.
+Variables are represented by atoms, which are structureless entities with a decidable equality: distinct names denote distinct atoms, and hence distinct variables. The nominal approach to abstract syntax was introduced by Gabbay and Pitts %\cite{gabbayNewApproachAbstract2002}%, motivated by the need for a mathematically rigorous and uniform treatment of variable binding and $\alpha$-equivalence. The central observation of their work is that the standard set-theoretic treatment of syntax with binders, which typically requires working with equivalence classes of terms under $\alpha$-renaming, can be replaced by a concrete, first-order presentation in which names are treated as primitive objects equipped with a notion of _freshness_. Rather than quotienting by $\alpha$-equivalence, terms are considered as concrete syntactic objects and equivalence is captured by the action of finite permutations of names. This approach yields clean inductive characterizations of $\alpha$-equivalence that are amenable to mechanical verification. The nominal approach has since been widely adopted in proof assistants and formalization frameworks, most notably in Nominal Isabelle %\cite{urbanGeneralBindingsAlphaEquivalence2012}%, and has been applied to the formalization of type theories, process calculi, and programming language semantics. The present work follows the nominal tradition and employs the Metalib library %\cite{weirichCoqMetalibPackage}% to support the development in Rocq.
 
-In a more recent work, %\cite{apinisSimpleFormalizationAlphaequivalence2026}% continue following the above framework of untyped $\lambda$-calculus. Their main observation on the topic of $\alpha$-equivalence is that "we do not need to consider the full context of the respective subexpression, but only the respective abstraction variables outside the subexpression." (p. 3-4), thus they develop a inductively defined structure to account for the context of both variables and terms. Both nominal and dual context approach deal with variables without resorting to purely nameless representations such as de Bruijn indices. However, the dual context approach builds extra structure on top of the standard $\lambda$-calculus, with the advantage that the inference rules require no fresh-name generation machinery, nor the swap operation from the nominal approach; instead, the correspondence between bound variables is resolved through their relative positions within both two contexts. *)
+In a more recent work, Apinis and Ahman %\cite{apinisSimpleFormalizationAlphaequivalence2026}% continue following the above framework of untyped $\lambda$-calculus. Their main observation on the topic of $\alpha$-equivalence is that "we do not need to consider the full context of the respective subexpression, but only the respective abstraction variables outside the subexpression." (p. 3-4); thus they develop an inductively defined structure to account for the context of both variables and terms. Both the nominal and the dual context approaches deal with variables without resorting to purely nameless representations such as de Bruijn indices. However, the dual context approach builds extra structure on top of the standard $\lambda$-calculus, with the advantage that the inference rules require no fresh-name generation machinery, nor the swap operation from the nominal approach; instead, the correspondence between bound variables is resolved through their relative positions within both contexts. *)
 (* begin hide *)
 Definition vswap (x y z : atom) :=
   if (z == x)
@@ -629,7 +629,7 @@ where "t =a u" := (aeq t u).
 \inferrule*[Right={({\rm\it p\_abs})}]{z \notin \{x, y\} \cup fv(t_1)\cup fv(t_2) \and \swap{x}{z}{t_1} =_p \swap{y}{z}{t_2}}{\lambda_x.t_1 =_p \lambda_y.t_2}
 \end{mathpar}
 \end{definition}
-\noindent% and it differs from Definition %\ref{def:aeq}% only in the abstraction case that is characterized by a single rule, where the $\alpha$-equivalence of $\lambda_x. t_1$ and $\lambda_y. t_2$ is established through a more symmetric use of swapping on both terms. Rather than renaming only one side, one takes a fresh variable $z$ (distinct from both $x$ and $y$ and not occurring free in either $t_1$ or $t_2$), and all occurrences of $x$ in $t_1$ (respectively $y$ in $t_2$) are transposed with $z$. The resulting terms are then required to be $=_p$-equivalent. This symmetric treatment avoids the asymmetry present in Definition %\ref{def:aeq}% and simplifies certain aspects of the metatheory. *)
+\noindent% and it differs from Definition %\ref{def:aeq}% only in the abstraction case, which is characterized by a single rule, where the $\alpha$-equivalence of $\lambda_x. t_1$ and $\lambda_y. t_2$ is established through a more symmetric use of swapping on both terms. Rather than renaming only one side, one takes a fresh variable $z$ (distinct from both $x$ and $y$ and not occurring free in either $t_1$ or $t_2$), and all occurrences of $x$ in $t_1$ (respectively $y$ in $t_2$) are transposed with $z$. The resulting terms are then required to be $=_p$-equivalent. This symmetric treatment avoids the asymmetry present in Definition %\ref{def:aeq}% and simplifies certain aspects of the metatheory. *)
 (* begin hide *)
 Reserved Notation "t1 =p t2"
     (at level 60, format "t1  '=p'  t2").
@@ -645,9 +645,6 @@ Inductive aeqp : Rel nexp :=
                                n_app t1 t2 =p n_app t1' t2'
 where "t =p u" := (aeqp t u).
 (* end hide *)
-(* ********************************** *)
-(* ************ aeqs **************** *)
-(* ********************************** *)
 (** The third definition, unlike the previous ones, takes the form of a congruence closure: it is defined as the smallest congruence relation containing a single swap-based renaming axiom. It can be seen as a nominal version of Church's definition %\cite{Church1941}%:
 
 %\begin{definition}\label{def:aeqs}
@@ -658,6 +655,9 @@ where "t =p u" := (aeqp t u).
 \end{mathpar}
 \end{definition}% *)
 (* begin hide *)
+(* ********************************** *)
+(* ************ aeqs **************** *)
+(* ********************************** *)
 Reserved Notation "t1 =s t2"
     (at level 60, format "t1  '=s'  t2").
 
@@ -677,7 +677,7 @@ Inductive aeqs: Rel nexp :=
                                 n_app t1 t2 =s n_app t1' t2'
 where "t =s u" := (aeqs t u).
 (* end hide *)
-(** The fourth definition, written $=_{\alpha}$, is taken from %\cite{apinisSimpleFormalizationAlphaequivalence2026}%. It is built in two levels, one for variables containing three rules ([GlobalVA], [HereVA] and [ThereVA]), and one for terms ([VarA] for equivalence on variables, [AppA] for function application and [AbsA] for abstraction). Bearing in mind that the authors use inverted lists ([xs::x], where [x] is the head and [xs] the tail of the list), [VarA] states that if variable context is $\alpha$-equivalence on variables, then it entails that it is $\alpha$-equivalence on terms that are variables, while [AppA] keeps the variable context of matching $\alpha$-equivalences and simply apply the corresponding functions as a new term. [AbsA] captures the transit between binded variables on term abstractions and the variable context. [GlobalVA] states that "in case of empty contexts, variable must be related to itself." (p. 4), while, for [HereVA], "if neither context is empty, the head values of each context are related." (idem), and, for [ThereVA], "variables a and b at lower positions in the context can be related only if neither a nor b appears above in their respective context." (idem). 
+(** The fourth definition, written $=_{\alpha}$, is taken from %\cite{apinisSimpleFormalizationAlphaequivalence2026}%. It is built in two levels, one for variables containing three rules ([GlobalVA], [HereVA] and [ThereVA]), and one for terms ([VarA] for equivalence on variables, [AppA] for function application and [AbsA] for abstraction). Bearing in mind that the authors use inverted lists ([xs::x], where [x] is the head and [xs] the tail of the list), [VarA] states that if a variable context relates two variables under $\alpha$-equivalence, then the corresponding variable terms are $\alpha$-equivalent, while [AppA] keeps the variable context of matching $\alpha$-equivalences and simply applies the corresponding subterms in a new application term. [AbsA] captures the relation between bound variables in term abstractions and the variable context. [GlobalVA] states that "in case of empty contexts, variable must be related to itself." (p. 4), while, for [HereVA], "if neither context is empty, the head values of each context are related." (idem), and, for [ThereVA], "variables a and b at lower positions in the context can be related only if neither a nor b appears above in their respective context." (idem). 
 
 %\begin{definition}\label{def:alpha}
 \begin{mathpar}
@@ -732,7 +732,7 @@ Proof.
   - intros t2 x y H. apply (aeq_stable_swap _ _ x y) in H. repeat rewrite swap_involutive in H. assumption.
 Qed.
 (* end hide *)
-(** The next theorem reflects the fact that (Definition %\ref{def:aeq}%), i.e. [=a] is stable by swapping, that is used to prove that [=a] is an equivalence relation: *)
+(** The next theorem reflects the fact that (Definition %\ref{def:aeq}%), i.e., [=a] is stable under swapping, which is used to prove that [=a] is an equivalence relation: *)
 
 Theorem aeq_swap: forall t1 t2 x y, t1 =a t2 <-> (swap x y t1) =a (swap x y t2).
 Proof.
@@ -1463,7 +1463,7 @@ Qed.
 \end{mathpar}%
 %\noindent% where $❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭$ is proved by considering all possible cases between the variables $x,y,z$ and $w$, and the hypothesis $(\forall z, z \in fv(t) \to ❬s; \vswap{y}{x}{z}❭ =\!\!vα\ ❬l; z❭)$. %\hfill% $\Box$ 
 
-The previous lemma is the key result to prove the following lemma, which has the same structure of rule ([s_abs_diff]) of Definition %\ref{def:aeqs}%: *)
+The previous lemma is the key result to prove the following lemma, which has the same structure as rule ([s_abs_diff]) of Definition %\ref{def:aeqs}%: *)
 
 Lemma alpha_rename: forall t x y, x ≠ y -> x \notin fv t -> Abs x (swap y x t) =α Abs y t.
 Proof.
@@ -1475,7 +1475,7 @@ Proof.
       * subst. contradiction.
       * constructor; auto. constructor. 
 Qed.
-(** %\noindent {\bf Proof.}% Note that [alpha_rename] shares the same destination as [alpha_rename_gen], however it has a different set of assumptions. Rather than dealing with a third variable within both contexts, it relates only two. Since we use [alpha_rename_gen] to prove it, it unsurprising that this third variable appears in the proof. However, only the case they are all different is worthy of note, since the other case simply follows from the definition. The following proof tree solves this case,
+(** %\noindent {\bf Proof.}% Note that [alpha_rename] shares the same goal as [alpha_rename_gen], but it has a different set of assumptions. Rather than dealing with a third variable within both contexts, it relates only two. Since we use [alpha_rename_gen] to prove it, it is unsurprising that this third variable appears in the proof. However, only the case they are all different is worthy of note, since the other case simply follows from the definition. The following proof tree solves this case,
 %\begin{mathpar}
 \inferrule*[Right={({\rm\it AbsA})}]
   {
@@ -1528,7 +1528,7 @@ Proof.
       * constructor;auto. apply a with (x:=x);auto.
 Qed.
 (* end hide *)
-(** As shown in %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, variables can be removed in the context, as long as they are shadowed by earlier ones with the same value. In the next lemma, we prove a stronger result showing that if the contexts have the same length and its last variable is the same, then this common variable can be removed and $\alpha$-equivalence is preserved: *)
+(** As shown in %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, variables can be removed from the context, as long as they are shadowed by earlier ones with the same value. In the next lemma, we prove a stronger result showing that if the contexts have the same length and their last variable is the same, then this common variable can be removed and $\alpha$-equivalence is preserved: *)
 
 Lemma alpha_drop_same_gen : forall t1 t2 s l x, length s = length l -> ❬[x] ++ s; t1❭ =α ❬[x] ++ l; t2❭ -> ❬s; t1❭ =α ❬l; t2❭.
 Proof.
@@ -1541,7 +1541,7 @@ Proof.
     + simpl. f_equal. assumption.
     + assumption.
 Qed.
-(** %\noindent% As a corollary, named [alpha_drop_same], we take $s$ and $l$ as the empty list, which is a key step in proving the next lemma, *)
+(** %\noindent% As a corollary, named [alpha_drop_same], we take $s$ and $l$ as empty lists, which is a key step in proving the next lemma, *)
 (* begin hide *)
 Corollary alpha_drop_same: forall x t1 t2, ❬snoc snil x; t1❭ =α ❬snoc snil x; t2❭ -> ❬snil; t1❭ =α ❬snil; t2❭.
 Proof.
@@ -1612,7 +1612,7 @@ apply slist_diff_iff in H_right. destruct H_right. contradiction.
   apply alpha_drop_same with x.
   exact H_bridge.
 Qed.
-(** Note that [alpha_push_swap] directly relates how one may perform a swap operation and preserve an $\alpha$-equivalence relation. We first proceed by using [alpha_rename_gen] to establish that [t2] under the original context is $\alpha$-equivalent to itself swapped in the [t1] variable context. Then, by transitivity, we show that [t2] swapped is $\alpha$-equivalent to [t1] under the same variable context, and [alpha_drop_same] allows us to drop the variable in its context to achieve [alpha_push_swap]. *)
+(** Note that [alpha_push_swap] directly relates how one may perform a swap operation and preserve an $\alpha$-equivalence relation. We first proceed by using [alpha_rename_gen] to establish that [t2] under the original context is $\alpha$-equivalent to itself swapped under the [t1] variable context. Then, by transitivity, we show that [t2] swapped is $\alpha$-equivalent to [t1] under the same variable context, and [alpha_drop_same] allows us to drop the variable in its context to achieve [alpha_push_swap]. *)
 (* begin hide *)  
 Corollary alpha_push_swap_nil : forall x y t1 t2, ❬snoc snil x; t1❭ =α ❬snoc snil y; t2❭ -> 
   ❬snil; t1❭ =α ❬snil; swap y x t2❭.
@@ -1667,7 +1667,7 @@ Proof.
         ** assumption.
   - apply p_app; assumption.
 Qed.
-(** %\noindent {\bf Proof.}%  The proof is by induction on the derivation of [t1 =a t2]. The only non-trivial case is that of the rule [aeq_abs_diff], where the fresh variable $z$ introduced by the rule must be eliminated in favour of the binding variables $x$ and $y$ using the rule [p_abs]. Suppose that [t1 =a t2] was generated by the rule [aeq_abs_diff] then both [t1] and [t2] are abstractions, say [t1] = $\lambda_x.t_1'$ and [t2] = $\lambda_y.t_2'$. Our goal is to prove that $\lambda_x.t_1' =_p \lambda_y.t_2'$ and the induction hypothesis is $\swap{x}{z}{t_1'} =_p \swap{y}{z}{t_2'}$ for a fresh variable $z$. The complete proof is given by the following derivation tree:
+(** %\noindent {\bf Proof.}%  The proof is by induction on the derivation of [t1 =a t2]. The only non-trivial case is that of the rule [aeq_abs_diff], where the fresh variable $z$ introduced by the rule must be eliminated in favor of the binding variables $x$ and $y$ using the rule [p_abs]. Suppose that [t1 =a t2] was generated by the rule [aeq_abs_diff] then both [t1] and [t2] are abstractions, say [t1] = $\lambda_x.t_1'$ and [t2] = $\lambda_y.t_2'$. Our goal is to prove that $\lambda_x.t_1' =_p \lambda_y.t_2'$ and the induction hypothesis is $\swap{x}{z}{t_1'} =_p \swap{y}{z}{t_2'}$ for a fresh variable $z$. The complete proof is given by the following derivation tree:
 %\begin{mathpar}
 \inferrule*[Right={($p\_{abs}$)}]{\inferrule*[Right={($aeqp\_{trans}$)}]{\inferrule*[Left={($aeqp\_{swap}$)}]{\inferrule*[Left={(i.h.)}]{~}{t_1' =_p \swap{y}{x}{t_2'}}}{\swap{x}{z}{t_1'} =_p \swap{x}{z}{\swap{y}{x}{t_2'}}} \and \inferrule*[Right={($aeqp\_{swap}\_{swap}$)}]{~}{\swap{x}{z}{\swap{y}{x}{t_2'}} =_p \swap{y}{z}{t_2'}}}{\swap{x}{z}{t_1'} =_p \swap{y}{z}{t_2'}}}{\lambda_x.t_1' =_p \lambda_y.t_2'}
 \end{mathpar}% $\hfill\Box$ *)  
@@ -1691,14 +1691,14 @@ Proof.
         ** apply notin_union_2 in H1. assumption.
   - apply s_app; assumption.
 Qed.
-(** %\noindent {\bf Proof.}% By induction on the derivation of [t1 =p t2]. Again, the only non-trivial case is that of the rule [p_abs], where the fresh variable $z$ introduced by the rule must be eliminated in favour of the binding variables $x$ and $y$ using the rule [s_abs_diff]. If [t1 =p t2] was generated by the rule [p_abs] then both $t_1$ and $t_2$ are abstractions, say [t1] = $\lambda_x.t_1'$ and [t2] = $\lambda_y.t_2'$. Our goal is to prove that $\lambda_x.t_1' =_s \lambda_y.t_2'$ and the induction hypothesis is $\swap{x}{z}{t_1'} =_s \swap{y}{z}{t_2'}$ for a fresh variable $z$. The complete proof is given by the following derivation tree:
+(** %\noindent {\bf Proof.}% By induction on the derivation of [t1 =p t2]. Again, the only non-trivial case is that of the rule [p_abs], where the fresh variable $z$ introduced by the rule must be eliminated in favor of the binding variables $x$ and $y$ using the rule [s_abs_diff]. If [t1 =p t2] was generated by the rule [p_abs] then both $t_1$ and $t_2$ are abstractions, say [t1] = $\lambda_x.t_1'$ and [t2] = $\lambda_y.t_2'$. Our goal is to prove that $\lambda_x.t_1' =_s \lambda_y.t_2'$ and the induction hypothesis is $\swap{x}{z}{t_1'} =_s \swap{y}{z}{t_2'}$ for a fresh variable $z$. The complete proof is given by the following derivation tree:
 %\begin{mathpar} \inferrule*[Right={($\nabla$)}]{\inferrule*[Left={($\star$)}]{~}{\lambda_x.t_1' =_s \lambda_z.\swap{x}{z}{t_1'}} \and \inferrule*[Right={($\nabla$)}]{\inferrule*[Left={($\Delta$)}]{\inferrule*[Left={(i.h.)}]{~}{\swap{x}{z}{t_1'} =_s \swap{y}{z}{t_2'}}}{\lambda_z.\swap{x}{z}{t_1'} =_s \lambda_z.\swap{y}{z}{t_2'}} \and \inferrule*[Right={($\Diamond$)}]{\inferrule*[Right={($\star$)}]{~}{\lambda_y.t_2' =_s \lambda_z.\swap{y}{z}{t_2'}}}{\lambda_z.\swap{y}{z}{t_2'} =_s \lambda_y.t_2'}}{\lambda_z.\swap{x}{z}{t_1'} =_s \lambda_y.t_2'}}{\lambda_x.t_1' =_s \lambda_y.t_2'}
 \end{mathpar}%
 %\noindent% where ($\nabla$) is the rule [s_trans], ($\Delta$) is [s_abs_same], ($\Diamond$) is [s_sym] and ($\star$) is [s_abs_diff]. $\hfill\Box$ *)
+(**************************) 
+(* 4. aeqs ====>>>>> Alpha *) 
 (**************************)
-(* 4. aeqs ====>>>>> Alpha *)
-(**************************)
-(** The next lemma shows that Definition %\ref{def:aeqs}% implies Definition %\ref{def:alpha}%. Using the fact that  %\cite{apinisSimpleFormalizationAlphaequivalence2026}% provide the proofs that [=α] is reflexive, symmetric and transitive, and considering that the proof strategy is by induction on [t1 =s t2], all cases but the abstraction are trivial. For the abstraction with the same abstraction variables, we are done by lemma [AlphaConvAbs] from %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, and for abstraction with different variables we close the proof with lemma [alpha_rename]. *)
+(** The next lemma shows that Definition %\ref{def:aeqs}% implies Definition %\ref{def:alpha}%. Using the proofs in  %\cite{apinisSimpleFormalizationAlphaequivalence2026}% that [=α] is reflexive, symmetric, and transitive, and considering that the proof strategy is by induction on [t1 =s t2], all cases except the abstraction are trivial. For the abstraction with the same abstraction variables, we are done by lemma [AlphaConvAbs] from %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, and for abstractions with different variables we close the proof with lemma [alpha_rename]. *)
 
 Lemma aeqs_to_Alpha: forall t1 t2, t1 =s t2 -> t1 =α t2.
 Proof.
@@ -1706,9 +1706,9 @@ Proof.
   - apply AlphaRefl.
   - apply AlphaSym. assumption.
   - apply AlphaTrans with t2 []; assumption.
-  - apply AlphaConvAbs; assumption.
-  - apply alpha_rename.
-    + symmetry; assumption.
+  - apply AlphaConvAbs; assumption. 
+  - apply alpha_rename. 
+    + symmetry; assumption. 
     + assumption.
   - constructor; assumption.
 Qed.
@@ -1789,4 +1789,4 @@ We presented a Rocq formalization in which four inductive definitions of $\alpha
 
 (** For future work, we plan to extend the formalization to syntax extended with metavariables, which play a central role in unification algorithms. In nominal unification %\cite{urbanNominalUnification2004}%, metavariables are subject to freshness constraints, and the interaction between binding, renaming, and the constraints imposed on metavariables is precisely what makes the $\alpha$-equivalence theory of such syntax nontrivial. *)
 (* This requires generalising the notion of terms, re-defining the operations used in the proofs --- notably $fv$, $bv$, and the swap operation --- for the extended syntax, producing the four corresponding definitions of $\alpha$-equivalence, and re-establishing their mutual equivalence, together with the properties required by unification problems, such as the renaming and substitution lemmas. *)
-(* We also plan to integrate this formalization with our previous works, all of which build upon the same nominal infrastructure but are developed independently. The equivalence results reported here offer a reusable foundation for %\cite{fmm2021}% and %\cite{sbmf2026}%, which formalise the confluence of calculi with explicit substitutions through the compositional Z property: a single development of the auxiliary metatheory of swap and freshness can be shared among them, and any property proved for one definition of $\alpha$-equivalence can be transported to the others without additional effort, which in particular decouples the confluence arguments from the particular notion of $\alpha$-equivalence they rely on. Similarly, we intend to revisit %\cite{limaFormalizedExtensionSubstitution2023}%, which formalises an extension of the substitution lemma and relies on one of the definitions compared in this work, and to exploit the dual context presentation to provide an alternative, and hopefully simpler, account of the results obtained there. *)
+(* We also plan to integrate this formalization with our previous works, all of which build upon the same nominal infrastructure but are developed independently. The equivalence results reported here offer a reusable foundation for %\cite{fmm2021}% and %\cite{sbmf2026}%, which formalize the confluence of calculi with explicit substitutions through the compositional Z property: a single development of the auxiliary metatheory of swap and freshness can be shared among them, and any property proved for one definition of $\alpha$-equivalence can be transported to the others without additional effort, which in particular decouples the confluence arguments from the particular notion of $\alpha$-equivalence they rely on. Similarly, we intend to revisit %\cite{limaFormalizedExtensionSubstitution2023}%, which formalizes an extension of the substitution lemma and relies on one of the definitions compared in this work, and to exploit the dual context presentation to provide an alternative, and hopefully simpler, account of the results obtained there. *)
