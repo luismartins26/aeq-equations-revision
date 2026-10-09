@@ -1,0 +1,22 @@
+-arg "-w -closed-notation-not-level-0 -w -notation-both-format-and-spaces -w -masking-absolute-name"
+-R src/Metalib Metalib
+-R ../lambda-simple-alpha Laeq
+src/Metalib/AssocList.v
+src/Metalib/CoqEqDec.v
+src/Metalib/CoqFSetDecide.v
+src/Metalib/CoqFSetInterface.v
+src/Metalib/CoqListFacts.v
+src/Metalib/CoqUniquenessTacEx.v
+src/Metalib/CoqUniquenessTac.v
+src/Metalib/FSetExtra.v
+src/Metalib/FSetWeakNotin.v
+src/Metalib/LibDefaultSimp.v
+src/Metalib/LibLNgen.v
+src/Metalib/LibTactics.v
+src/Metalib/MetatheoryAtom.v
+src/Metalib/Metatheory.v
+../lambda-simple-alpha/MyUtils.v
+../lambda-simple-alpha/Lam.v
+src/aeq_nexp.v
+
+
