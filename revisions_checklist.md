@@ -15,7 +15,7 @@
 
 ### Page 2
 
-* [ ] **Citations:** Add more supporting references (such as a relevant survey) to back up the claim regarding the wide adoption of the nominal approach.
+* [x] **Citations:** Add more supporting references (such as a relevant survey) to back up the claim regarding the wide adoption of the nominal approach.
 * [x] **Grammar:** Change "continue following the above framework of untyped" to "continue to follow...".
 
 ### Page 3
