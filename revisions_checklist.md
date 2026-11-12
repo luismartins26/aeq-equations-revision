@@ -20,7 +20,7 @@
 
 ### Page 3
 
-* [ ] **Spacing/Formatting (Line 4 from bottom):** Fix the extra empty space between "of the metatheory." and "The third".
+* [x] **Spacing/Formatting (Line 4 from bottom):** Fix the extra empty space between "of the metatheory." and "The third".
 
 ### Page 4
 
@@ -44,4 +44,4 @@
 
 ### References
 
-* [ ] **Update Citation:** Update the `[Apinis and Ahman 2026]` reference to reflect its publication in *Logical Methods in Computer Science* (LMCS).
+* [x] **Update Citation:** Update the `[Apinis and Ahman 2026]` reference to reflect its publication in *Logical Methods in Computer Science* (LMCS).
