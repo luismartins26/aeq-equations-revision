@@ -629,7 +629,8 @@ where "t =a u" := (aeq t u).
 \inferrule*[Right={({\rm\it p\_abs})}]{z \notin \{x, y\} \cup fv(t_1)\cup fv(t_2) \and \swap{x}{z}{t_1} =_p \swap{y}{z}{t_2}}{\lambda_x.t_1 =_p \lambda_y.t_2}
 \end{mathpar}
 \end{definition}
-\noindent% and it differs from Definition %\ref{def:aeq}% only in the abstraction case, which is characterized by a single rule, where the $\alpha$-equivalence of $\lambda_x. t_1$ and $\lambda_y. t_2$ is established through a more symmetric use of swapping on both terms. Rather than renaming only one side, one takes a fresh variable $z$ (distinct from both $x$ and $y$ and not occurring free in either $t_1$ or $t_2$), and all occurrences of $x$ in $t_1$ (respectively $y$ in $t_2$) are transposed with $z$. The resulting terms are then required to be $=_p$-equivalent. This symmetric treatment avoids the asymmetry present in Definition %\ref{def:aeq}% and simplifies certain aspects of the metatheory.*)
+\noindent% and it differs from Definition %\ref{def:aeq}% only in the abstraction case, which is characterized by a single rule, where the $\alpha$-equivalence of $\lambda_x. t_1$ and $\lambda_y. t_2$ is established through a more symmetric use of swapping on both terms. Rather than renaming only one side, one takes a fresh variable $z$ (distinct from both $x$ and $y$ and not occurring free in either $t_1$ or $t_2$), and all occurrences of $x$ in $t_1$ (respectively $y$ in $t_2$) are transposed with $z$. The resulting terms are then required to be $=_p$-equivalent. This symmetric treatment avoids the asymmetry present in Definition %\ref{def:aeq}% and simplifies certain aspects of the metatheory.
+*)
 (* begin hide *)
 Reserved Notation "t1 =p t2"
     (at level 60, format "t1  '=p'  t2").
