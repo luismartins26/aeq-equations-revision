@@ -1401,7 +1401,7 @@ Proof.
   - intros x y s l H. simpl in *. apply AppA.    
     + apply IH1. intros z Hz_in_t1. apply H. auto.
     + apply IH2. intros z Hz_in_t2. apply H. auto.
-  - intros x y s l H. simpl in *. apply AbsA. apply IH. intros w Hw. unfold vswap. unfold AtomConf.V in *. destruct (z == y).
+  - intros x y s l H. simpl in *. apply AbsA. apply IH. intros w. intros Hw. unfold vswap. unfold AtomConf.V in *. destruct (z == y).
     + subst. destruct (w == y) as [Heq | Hneq].
       * subst. constructor.
       * destruct (w == x).
@@ -1458,11 +1458,11 @@ Proof.
                     ******* contradiction.
                     *******  apply H. auto.
 Qed.
-(** %\noindent {\bf Proof.}% The proof is by induction on [t]. The interesting case is when [t] = $\lambda_z.t_1$ that is proved as follows:
+(** %\noindent {\bf Proof.}% The proof is by induction on a term [t]. The interesting case is when [t] = $\lambda_z.t_1$ that is proved as follows:
 %\begin{mathpar}
- \inferrule*[Right={$AbsA$}]{ \inferrule*[Right={(i.h.)}]{\inferrule*[Right={$\alli$}]{\inferrule*[Right={$\toisa$}]{❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭}{w \in fv(t_1) \to ❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭}}{\forall z, z \in fv(t_1) \to ❬s :: \swap{y}{x}{z}; \swap{y}{x}{z}❭ =\!\!vα\ ❬l :: z; z❭}}{❬s :: \swap{y}{x}{z}; \swap{y}{x}{t_1}❭ =\!\!α\ ❬l :: z; t_1❭}}{❬s; \swap{y}{x}{\lambda_z. t_1}❭ =\!\!α\ ❬l; \lambda_z.t_1❭}
+ \inferrule*[Right={$AbsA$}]{ \inferrule*[Right={(i.h.)}]{\inferrule*[Right={$\alli$}]{\inferrule*[Right={$\toisa$}]{❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭}{w \in fv(t_1) \to ❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭}}{\forall v, v \in fv(t_1) \to ❬s :: \swap{y}{x}{z}; \swap{y}{x}{v}❭ =\!\!vα\ ❬l :: z; v❭}}{❬s :: \swap{y}{x}{z}; \swap{y}{x}{t_1}❭ =\!\!α\ ❬l :: z; t_1❭}}{❬s; \swap{y}{x}{\lambda_z. t_1}❭ =\!\!α\ ❬l; \lambda_z.t_1❭}
 \end{mathpar}%
-%\noindent% where $❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭$ is proved by considering all possible cases between the variables $x,y,z$ and $w$, and the hypothesis $(\forall z, z \in fv(t) \to ❬s; \vswap{y}{x}{z}❭ =\!\!vα\ ❬l; z❭)$. %\hfill% $\Box$ 
+%\noindent% where $❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭$ is proved by considering all possible cases between the variables $x,y,z$ and $w$, and the hypothesis $(\forall z, z \in fv(t) \to ❬s; \vswap{y}{x}{z}❭ =\!\!vα\ ❬l; z❭)$, that asserts that each free variable $z$ of the term $t$ implies that the context keeps $\alpha$-equivalence on variables under a swap operation. %\hfill% $\Box$ 
 
 The previous lemma is the key result to prove the following lemma, which has the same structure as rule ([s_abs_diff]) of Definition %\ref{def:aeqs}%: *)
 

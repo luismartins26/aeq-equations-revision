@@ -30,8 +30,8 @@
 
 ### Page 5
 
-* [ ] **`Lemma alpha_rename_gen` Proof (Derivation Tree):** Explain why `z` in `l :: z` is not also replaced by `w` when reading `(\forall_i)` bottom-up in the derivation tree.
-* [ ] **`Lemma alpha_rename_gen` Proof (Hypothesis):** Define or clarify what `t` refers to in the hypothesis `z \in fv(t)` at the end of the proof.
+* [x] **`Lemma alpha_rename_gen` Proof (Derivation Tree):** Explain why `z` in `l :: z` is not also replaced by `w` when reading `(\forall_i)` bottom-up in the derivation tree.
+* [x] **`Lemma alpha_rename_gen` Proof (Hypothesis):** Define or clarify what `t` refers to in the hypothesis `z \in fv(t)` at the end of the proof.
 * [ ] **`Lemma alpha_rename`:** Clarify where the `y \neq z` hypothesis comes from.
 * [ ] **Shadowing Explanation:** Define "shadowed" explicitly when stating that variables can be removed from the context if shadowed by earlier ones with the same value. Also verify/clarify whether a variable is shadowed by *earlier* or *later* ones when comparing the path in the syntax tree versus the list of bound variables along that path.
 
@@ -40,7 +40,7 @@
 * [ ] **`Theorem aeq_aeqp` Proof:** Clarify where `(I.H.)` comes from in the proof.
 * [x] **Formatting (`Theorem aeq_aeqp`):** Fix the formatting/line-break issue between the end of the `aeq_aeqp` proof and the start of the sentence "We now prove that Definition 2 implies...".
 * [x] **Formatting (`Theorem aeqp_aeqs`):** Fix the same end-of-proof formatting issue at the end of the `aeqp_aeqs` proof on the following page (p. 7).
-* [ ] **Restructuring (Page 7):** Move the text starting from "Using the proofs in [Apinis and Ahman 2026]..." through the end of the paragraph into the proof of the lemma, and remove the duplicated information already present in that proof.
+* [x] **Restructuring (Page 7):** Move the text starting from "Using the proofs in [Apinis and Ahman 2026]..." through the end of the paragraph into the proof of the lemma, and remove the duplicated information already present in that proof.
 
 ### References
 
