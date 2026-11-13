@@ -88,7 +88,7 @@ The contributions of this work are as follows:
   \item A machine-checked proof that $=_a$, $=_p$, $=_s$ and $=_{\alpha}$ are mutually equivalent.
  \end{enumerate}%
 
-This work is developed with the Rocq proof assistant, and this article is generated directly from a Rocq source file. Consequently, the formal statements and proof scripts shown in this article are the actual Rocq code, and every claim labeled as a lemma or a theorem has been machine-verified. The source code is freely available at
+This work is developed with the Rocq proof assistant, and this article is generated directly from a Rocq source file. Consequently, the formal statements and proof scripts shown in this article are the actual Rocq code, and every claim labeled as a lemma or a theorem has been machine-verified. The first three definitions were implemented in the current code, while the fourth one was imported from the Rocq file made available by \cite{apinisSimpleFormalizationAlphaequivalence2026}. No other proof assistant was used and formal results from other works that were used in the proofs of this paper are explicitly referenced in the text. The source code is freely available at
 
 %\url{https://github.com/flaviodemoura/aeq-equations}%
 

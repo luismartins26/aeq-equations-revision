@@ -2,7 +2,7 @@
 
 ## General & Conceptual Clarifications
 
-* [ ] **Novelty & Prior Work:** Clarify which of the alpha-equivalence definitions and equivalence proofs are novel contributions of this paper versus those already established in the literature or formalized in other proof assistants.
+* [x] **Novelty & Prior Work:** Clarify which of the alpha-equivalence definitions and equivalence proofs are novel contributions of this paper versus those already established in the literature or formalized in other proof assistants.
 * [ ] **Introduction Contributions:** Explain clearly in the Introduction in what sense the alternative definitions constitute a contribution of the present work.
 * [ ] **Nominal Sets & Transpositions:** Add a remark noting that theorems about `a/p`-equivalence invariances follow from invariance under name permutations (via nominal sets), and clarify that restricting to transpositions is sufficient for the current development.
 * [ ] **Future Work Expansion:** Mention in the future work/conclusion the potential for generalizing this comparison to syntax with a general name binder (e.g., `<a>t`), terms with metavariables, and the impact of Definition 4 on unification and matching problems.
