@@ -1701,7 +1701,7 @@ Qed.
 (**************************) 
 (* 4. aeqs ====>>>>> Alpha *) 
 (**************************)
-(** The next lemma shows that Definition %\ref{def:aeqs}% implies Definition %\ref{def:alpha}%. Using the proofs in  %\cite{apinisSimpleFormalizationAlphaequivalence2026}% that [=α] is reflexive, symmetric, and transitive, and considering that the proof strategy is by induction on [t1 =s t2], all cases except the abstraction are trivial. For the abstraction with the same abstraction variables, we are done by lemma [AlphaConvAbs] from %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, and for abstractions with different variables we close the proof with lemma [alpha_rename]. *)
+(** The next lemma shows that Definition %\ref{def:aeqs}% implies Definition %\ref{def:alpha}%. *)
 
 Lemma aeqs_to_Alpha: forall t1 t2, t1 =s t2 -> t1 =α t2.
 Proof.
@@ -1715,7 +1715,7 @@ Proof.
     + assumption.
   - constructor; assumption.
 Qed.
-(** %\noindent {\bf Proof.}% The variable and application cases map directly to the constructors. For abstractions with the same variables, the goal follows by theorem [AlphaConvAbs] that corresponds to the rule ([aeqs_abs_same]) of Definition %\ref{def:aeqs}%. For abstractions with distinct variables, we are done with an application of [alpha_rename]. %\hfill% $\Box$ *)
+(** %\noindent {\bf Proof.}% Using the proofs in  %\cite{apinisSimpleFormalizationAlphaequivalence2026}% that [=α] is reflexive, symmetric, and transitive, and considering that the proof strategy is by induction on [t1 =s t2], all cases except the abstraction are trivial. For the abstraction with the same abstraction variables, we are done by lemma [AlphaConvAbs] from %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, which maps to the rule ([aeqs_abs_same]) of Definition %\ref{def:aeqs}%, and for abstractions with different variables we close the proof with lemma [alpha_rename]. %\hfill% $\Box$ *)
 
 (** In order to close the dependency graph between all four definitions, it remains to prove that $=_{\alpha}$ implies [=a]: *)
 
