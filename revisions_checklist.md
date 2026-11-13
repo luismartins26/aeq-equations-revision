@@ -37,7 +37,7 @@
 
 ### Page 6 & Page 7
 
-* [ ] **`Theorem aeq_aeqp` Proof:** Clarify where `(I.H.)` comes from in the proof.
+* [x] **`Theorem aeq_aeqp` Proof:** Clarify where `(I.H.)` comes from in the proof.
 * [x] **Formatting (`Theorem aeq_aeqp`):** Fix the formatting/line-break issue between the end of the `aeq_aeqp` proof and the start of the sentence "We now prove that Definition 2 implies...".
 * [x] **Formatting (`Theorem aeqp_aeqs`):** Fix the same end-of-proof formatting issue at the end of the `aeqp_aeqs` proof on the following page (p. 7).
 * [x] **Restructuring (Page 7):** Move the text starting from "Using the proofs in [Apinis and Ahman 2026]..." through the end of the paragraph into the proof of the lemma, and remove the duplicated information already present in that proof.
