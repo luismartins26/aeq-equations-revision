@@ -24,7 +24,7 @@
 
 ### Page 4
 
-* [ ] **Terminology Clarification:** Clarify what "lower positions" means regarding variables `a` and `b`, addressing the potential confusion between higher positions in the syntax tree and list indexing/positions (considering a list with the head on the right).
+* [x] **Terminology Clarification:** Clarify what "lower positions" means regarding variables `a` and `b`, addressing the potential confusion between higher positions in the syntax tree and list indexing/positions (considering a list with the head on the right).
 * [x] **Definition 4 (`ThereVA`):** Clarify or justify the choice of using `a` and `b` to denote variables in rule `(ThereVA)`.
 * [ ] **Definition 4 (`HereVA`):** Explain why `xs` and `ys` are not restricted to lists of the same length in rule `(HereVA)`.
 
