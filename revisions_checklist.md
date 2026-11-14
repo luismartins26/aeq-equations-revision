@@ -33,7 +33,7 @@
 * [x] **`Lemma alpha_rename_gen` Proof (Derivation Tree):** Explain why `z` in `l :: z` is not also replaced by `w` when reading `(\forall_i)` bottom-up in the derivation tree.
 * [x] **`Lemma alpha_rename_gen` Proof (Hypothesis):** Define or clarify what `t` refers to in the hypothesis `z \in fv(t)` at the end of the proof.
 * [x] **`Lemma alpha_rename`:** Clarify where the `y \neq z` hypothesis comes from.
-* [ ] **Shadowing Explanation:** Define "shadowed" explicitly when stating that variables can be removed from the context if shadowed by earlier ones with the same value. Also verify/clarify whether a variable is shadowed by *earlier* or *later* ones when comparing the path in the syntax tree versus the list of bound variables along that path.
+* [x] **Shadowing Explanation:** Define "shadowed" explicitly when stating that variables can be removed from the context if shadowed by earlier ones with the same value. Also verify/clarify whether a variable is shadowed by *earlier* or *later* ones when comparing the path in the syntax tree versus the list of bound variables along that path.
 
 ### Page 6 & Page 7
 

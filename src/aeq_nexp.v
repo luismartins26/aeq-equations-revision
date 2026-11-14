@@ -1513,7 +1513,9 @@ Qed.
       {\langle [x] ; \swap{y}{x}{t} \rangle =_\alpha \langle [y] ; t \rangle}
   }
   {\lambda_x.\swap{y}{x}{t} =_\alpha \lambda_y.t}
-\end{mathpar}% *)
+\end{mathpar}% $\hfill\Box$
+
+*)
 (* begin hide *)
 Lemma var_alpha_drop : forall s l v y x, length s = length l ->
   ❬[x] ++ s; v❭ =vα ❬[x] ++ l; y❭ -> ❬s; v❭ =vα ❬l; y❭.
@@ -1531,26 +1533,11 @@ Proof.
       * constructor;auto. apply a with (x:=x);auto.
 Qed.
 (* end hide *)
-(** As shown in %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, variables can be removed from the context, as long as they are shadowed by earlier ones with the same value. In the next lemma, we prove a stronger result showing that if the contexts have the same length and their last variable is the same, then this common variable can be removed and $\alpha$-equivalence is preserved: *)
-
-Lemma alpha_drop_same_gen : forall t1 t2 s l x, length s = length l -> ❬[x] ++ s; t1❭ =α ❬[x] ++ l; t2❭ -> ❬s; t1❭ =α ❬l; t2❭.
-Proof.
-  induction t1 as [v | t11 IH1 t12 IH2 | y t11 IH]; intros t2 s l x Hlen H.  
-  - inversion H; subst. apply VarA. apply var_alpha_drop with x; assumption.    
-  - inversion H; subst. apply AppA.
-    + apply IH1 with x; assumption.
-    + apply IH2 with x; assumption.    
-  - inversion H; subst. apply AbsA. apply IH with x.
-    + simpl. f_equal. assumption.
-    + assumption.
-Qed.
-(** %\noindent% As a corollary, named [alpha_drop_same], we take $s$ and $l$ as empty lists, which is a key step in proving the next lemma, *)
+(** As shown in %\cite{apinisSimpleFormalizationAlphaequivalence2026}%, leftmost ("later") variables can be added or removed from the context in an $\alpha$-equivalence relation, as long as the operation is performed on both sides and the context of both sides has the same length ([AlphaCtxImplGlobs]). As a particular case, named [alpha_drop_same], we consider the removal of a single variable to form an empty context, which is a key step in proving the next lemma, *)
 (* begin hide *)
 Corollary alpha_drop_same: forall x t1 t2, ❬snoc snil x; t1❭ =α ❬snoc snil x; t2❭ -> ❬snil; t1❭ =α ❬snil; t2❭.
 Proof.
-  intros x t1 t2 H. apply alpha_drop_same_gen with x.
-  - reflexivity.
-  - assumption.
+  intros x t1 t2 H. pose proof AlphaCtxImplGlobs t1 t2 [] [] [x]. apply H0;auto. 
 Qed.
 
 Lemma fv_Lam_to_nexp_equiv : forall (t : Lam) (z : atom),
@@ -1615,7 +1602,8 @@ apply slist_diff_iff in H_right. destruct H_right. contradiction.
   apply alpha_drop_same with x.
   exact H_bridge.
 Qed.
-(** Note that [alpha_push_swap] directly relates how one may perform a swap operation and preserve an $\alpha$-equivalence relation. We first proceed by using [alpha_rename_gen] to establish that [t2] under the original context is $\alpha$-equivalent to itself swapped under the [t1] variable context. Then, by transitivity, we show that [t2] swapped is $\alpha$-equivalent to [t1] under the same variable context, and [alpha_drop_same] allows us to drop the variable in its context to achieve [alpha_push_swap]. *)
+(** Note that [alpha_push_swap] directly relates how one may perform a swap operation and preserve an $\alpha$-equivalence relation. We first proceed by using [alpha_rename_gen] to establish that [t2] under the original context is $\alpha$-equivalent to itself swapped under the [t1] variable context. Then, by transitivity, we show that [t2] swapped is $\alpha$-equivalent to [t1] under the same variable context, and [alpha_drop_same] allows us to drop the variable in its context to achieve [alpha_push_swap].
+*)
 (* begin hide *)  
 Corollary alpha_push_swap_nil : forall x y t1 t2, ❬snoc snil x; t1❭ =α ❬snoc snil y; t2❭ -> 
   ❬snil; t1❭ =α ❬snil; swap y x t2❭.
