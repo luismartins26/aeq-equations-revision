@@ -1462,9 +1462,9 @@ Proof.
 Qed.
 (** %\noindent {\bf Proof.}% The proof is by induction on a term [t]. The interesting case is when [t] = $\lambda_z.t_1$ that is proved as follows:
 %\begin{mathpar}
- \inferrule*[Right={$AbsA$}]{ \inferrule*[Right={(i.h.)}]{\inferrule*[Right={$\alli$}]{\inferrule*[Right={$\toisa$}]{❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭}{w \in fv(t_1) \to ❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭}}{\forall v, v \in fv(t_1) \to ❬s :: \swap{y}{x}{z}; \swap{y}{x}{v}❭ =\!\!vα\ ❬l :: z; v❭}}{❬s :: \swap{y}{x}{z}; \swap{y}{x}{t_1}❭ =\!\!α\ ❬l :: z; t_1❭}}{❬s; \swap{y}{x}{\lambda_z. t_1}❭ =\!\!α\ ❬l; \lambda_z.t_1❭}
+ \inferrule*[Right={$AbsA$}]{ \inferrule*[Right={(i.h.)}]{\inferrule*[Right={$\alli$}]{\inferrule*[Right={$\toisa$}]{\langle s :: \swap{y}{x}{z}; \swap{y}{x}{w} \rangle =\!\!vα\ \langle l :: z; w \rangle}{w \in fv(t_1) \to \langle s :: \swap{y}{x}{z}; \swap{y}{x}{w} \rangle =\!\!vα\ \langle l :: z; w \rangle}}{\forall v, v \in fv(t_1) \to \langle s :: \swap{y}{x}{z}; \swap{y}{x}{v} \rangle =\!\!vα\ \langle l :: z; v \rangle}}{\langle s :: \swap{y}{x}{z}; \swap{y}{x}{t_1} \rangle =\!\!α\ \langle l :: z; t_1 \rangle}}{\langle s; \swap{y}{x}{\lambda_z. t_1} \rangle =\!\!α\ \langle l; \lambda_z.t_1 \rangle}
 \end{mathpar}%
-%\noindent% where $❬s :: \swap{y}{x}{z}; \swap{y}{x}{w}❭ =\!\!vα\ ❬l :: z; w❭$ is proved by considering all possible cases between the variables $x,y,z$ and $w$, and the hypothesis $(\forall z, z \in fv(t) \to ❬s; \vswap{y}{x}{z}❭ =\!\!vα\ ❬l; z❭)$, that asserts that each free variable $z$ of the term $t$ implies that the context keeps $\alpha$-equivalence on variables under a swap operation. %\hfill% $\Box$ 
+%\noindent% where $\langle s :: \swap{y}{x}{z}; \swap{y}{x}{w} \rangle =\!\!vα\ \langle l :: z; w \rangle$ is proved by considering all possible cases between the variables $x,y,z$ and $w$, and the hypothesis $(\forall z, z \in fv(t) \to \langle s; \vswap{y}{x}{z} \rangle =\!\!vα\ \langle l; z \rangle)$, that asserts that each free variable $z$ of the term $t$ implies that the context keeps $\alpha$-equivalence on variables under a swap operation. %\hfill% $\Box$
 
 The previous lemma is the key result to prove the following lemma, which has the same structure as rule ([s_abs_diff]) of Definition %\ref{def:aeqs}%: *)
 
